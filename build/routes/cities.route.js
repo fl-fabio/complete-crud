@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.router = void 0;
+const express_1 = require("express");
+const cities_validation_1 = require("../middleware/validators/cities.validation");
+const query_validation_1 = require("../middleware/validators/query.validation");
+const cities_controller_1 = require("../controllers/cities.controller");
+exports.router = (0, express_1.Router)();
+exports.router.get("/", query_validation_1.validateQueryParams, cities_controller_1.getCities);
+exports.router.get("/:id", cities_controller_1.getCityById);
+exports.router.post("/", cities_validation_1.validateCityPostRequest, cities_controller_1.addCity);
+exports.router.put(":/id", cities_validation_1.validateCityPutRequest, cities_controller_1.updateCityById);
+exports.router.delete(":/id", cities_controller_1.deletecityById);
