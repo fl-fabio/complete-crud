@@ -14,7 +14,7 @@ const user_model_1 = require("../models/user.model");
 const common_functions_1 = require("../utils/common.functions");
 const showUsers = (query) => __awaiter(void 0, void 0, void 0, function* () {
     const users = yield user_model_1.User.find().populate("city");
-    return (0, common_functions_1.getAll)(users, ["city", "email"], query);
+    return (0, common_functions_1.getAll)(users, ["city", "email", "name"], query);
 });
 exports.showUsers = showUsers;
 const findUser = (id) => __awaiter(void 0, void 0, void 0, function* () {

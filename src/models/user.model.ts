@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema<IUser>(
     city: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "City", // Riferimento al modello/collection "City"
-      requiredd: true,
+      required: true,
     },
     phone: {
       type: String,

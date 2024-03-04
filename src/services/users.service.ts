@@ -7,7 +7,7 @@ export const showUsers = async (query: {
   [key: string]: string | number;
 }): Promise<PaginatedResponse<IUser>> => {
   const users = await User.find().populate("city");
-  return getAll(users, ["city", "email"], query);
+  return getAll(users, ["city", "email", "name"], query);
 };
 
 export const findUser = async (id: string):Promise<IUser | null> => {

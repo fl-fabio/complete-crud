@@ -1,6 +1,5 @@
-import { body, query } from "express-validator";
+import { body } from "express-validator";
 import { findCity } from "../../services/cities.service";
-import { ICity } from "../../types/city.interface";
 
 export const validatePostRequest = [
   body("name")
@@ -37,7 +36,9 @@ export const validatePostRequest = [
     .notEmpty()
     .withMessage("Password is required")
     .isLength({ min: 8 })
-    .withMessage("Password must be at least 8 characters long"),
+    .withMessage("Password must be at least 8 characters long")
+    .matches(/^(?=.*[A-Z])(?=.*[\W_]).{8,}$/)
+    .withMessage("Password must contain at least one uppercase letter, one special character and one number"),
 ];
 
 export const validatePutRequest = [

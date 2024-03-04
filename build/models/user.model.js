@@ -21,7 +21,7 @@ const userSchema = new mongoose_1.default.Schema({
     city: {
         type: mongoose_1.default.Schema.Types.ObjectId,
         ref: "City",
-        requiredd: true,
+        required: true,
     },
     phone: {
         type: String,

@@ -6,7 +6,7 @@ export interface IUser {
     name: string,
     surname: string,
     email: string,
-    city: Schema.Types.ObjectId;
+    city: ICity;
     phone: string,
     password: string,
 }

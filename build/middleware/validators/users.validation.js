@@ -47,7 +47,9 @@ exports.validatePostRequest = [
         .notEmpty()
         .withMessage("Password is required")
         .isLength({ min: 8 })
-        .withMessage("Password must be at least 8 characters long"),
+        .withMessage("Password must be at least 8 characters long")
+        .matches(/^(?=.*[A-Z])(?=.*[\W_]).{8,}$/)
+        .withMessage("Password must contain at least one uppercase letter, one special character and one number"),
 ];
 exports.validatePutRequest = [
     (0, express_validator_1.body)("name")

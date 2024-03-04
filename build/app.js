@@ -8,6 +8,7 @@ const express_1 = __importDefault(require("express"));
 const users_route_1 = require("./routes/users.route");
 const cities_route_1 = require("./routes/cities.route");
 const common_route_1 = require("./routes/common.route");
+const auth_route_1 = require("./routes/auth.route");
 exports.app = (0, express_1.default)();
 //configure the middleware for body requests
 exports.app.use(express_1.default.urlencoded({ extended: false }));
@@ -18,4 +19,5 @@ exports.app.get("/status", (req, res) => {
 //indicate a routes groups
 exports.app.use("/users", users_route_1.router);
 exports.app.use("/cities", cities_route_1.router);
+exports.app.use("/auth", auth_route_1.router);
 exports.app.use("*", common_route_1.router);
