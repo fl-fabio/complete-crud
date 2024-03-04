@@ -9,25 +9,43 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Signup = void 0;
+exports.Login = exports.Signup = void 0;
 const auth_service_1 = require("../services/auth.service");
 const authFunctions_1 = require("../utils/authFunctions");
 const users_service_1 = require("../services/users.service");
 const Signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const user = req.body;
-    const userFounded = yield ((0, auth_service_1.findUserByEmail)(user.email));
-    if (userFounded) {
+    const userByEmail = yield (0, auth_service_1.findUserByEmail)(user.email);
+    if (userByEmail) {
         return res.status(400).json({ message: "Email already exists" });
     }
     try {
-        const user = yield (0, users_service_1.createUser)(req.body);
-        if (user) {
-            const token = (0, authFunctions_1.createSecretToken)(user.id, 30);
-            return res.status(200).json({ user: "User created", token });
-        }
+        const userCreated = yield (0, users_service_1.createUser)(req.body);
+        const token = (0, authFunctions_1.createSecretToken)(userCreated.id, 30);
+        return res.status(200).json({ user: userCreated, token });
     }
     catch (err) {
         res.status(500).json({ error: err.message });
     }
 });
 exports.Signup = Signup;
+const Login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const user = req.body;
+    console.log('req User', user);
+    const userByEmail = yield (0, auth_service_1.findUserByEmail)(user.email);
+    console.log('user By Email', userByEmail);
+    if (!userByEmail) {
+        return res.status(400).json({ message: "Wrong email or password" });
+    }
+    if (userByEmail.password !== user.password) {
+        return res.status(400).json({ message: "Wrong email or password" });
+    }
+    try {
+        const token = (0, authFunctions_1.createSecretToken)(userByEmail.id, 30);
+        return res.status(200).json({ user: userByEmail, token });
+    }
+    catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+exports.Login = Login;

@@ -12,8 +12,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.deletecityById = exports.updateCityById = exports.getCityById = exports.getCities = exports.addCity = void 0;
 const cities_service_1 = require("../services/cities.service");
 const bodyParser_1 = require("../middleware/bodyParser");
+const auth_middleware_1 = require("../middleware/auth.middleware");
 exports.addCity = [
     bodyParser_1.ValidateRequest,
+    auth_middleware_1.VerifyToken,
     (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             const city = yield (0, cities_service_1.createCity)(req.body);

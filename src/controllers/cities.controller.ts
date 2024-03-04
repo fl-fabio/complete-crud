@@ -8,9 +8,11 @@ import {
 } from "../services/cities.service";
 
 import { ValidateRequest } from "../middleware/bodyParser";
+import { VerifyToken } from "../middleware/auth.middleware";
 
 export const addCity = [
   ValidateRequest,
+  VerifyToken,
   async (req: Request, res: Response) => {
     try {
       const city = await createCity(req.body);
